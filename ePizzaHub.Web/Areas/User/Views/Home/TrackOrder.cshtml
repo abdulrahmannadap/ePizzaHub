@@ -1,0 +1,49 @@
+﻿@using ePizzaHub.Core.Database.Entities
+@model IEnumerable<PaymentDetail>
+
+@{
+    ViewData["Title"] = "Track Order";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+
+    var totalTax = Model.Sum(x => x.Tax);
+    var totalAmount = Model.Sum(x => x.Total);
+    var grandTotal = Model.Sum(x => x.GrandTotal);
+    var orderCount = Model.Count();
+    var anyOrder = Model.Any();
+}
+
+<h1 class="mb-4">Track Order</h1>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Orders</th>
+                <th>Status</th>
+                <th>Total Tax</th>
+                <th>Total Amount</th>
+                <th>Grand Total</th>
+                <th>Last Order Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (anyOrder)
+            {
+                <tr>
+                    <td>@orderCount</td>
+                    <td>Delivered</td>
+                    <td>@totalTax.ToString("C")</td>
+                    <td>@totalAmount.ToString("C")</td>
+                    <td>@grandTotal.ToString("C")</td>
+                    <td>@Model.Max(x => x.CreatedDate).ToString("g")</td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center">No orders found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

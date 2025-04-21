@@ -1,0 +1,79 @@
+﻿@model ePizzaHub.Models.AddressModel
+
+@{
+    ViewData["Title"] = "Delivery Address";
+   
+}
+
+<div class="row">
+    <div class="col-xxl-12">
+        <div class="card mb-4" style="text-align: left !important;">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Delivery Address</h5>
+                <a asp-action="Index" asp-controller="Home" asp-area="Admin" class="btn btn-outline-warning">
+                    <i class="bi bi-arrow-left-square"></i>
+                </a>
+            </div>
+
+            <form asp-action="CheckOut">
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input asp-for="Street" class="form-control" placeholder="Street" />
+                                <label asp-for="Street"></label>
+                                <span asp-validation-for="Street" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input asp-for="Locality" class="form-control" placeholder="Locality" />
+                                <label asp-for="Locality"></label>
+                                <span asp-validation-for="Locality" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input asp-for="ZipCode" class="form-control" placeholder="Zip Code" />
+                                <label asp-for="ZipCode"></label>
+                                <span asp-validation-for="ZipCode" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input asp-for="City" class="form-control" placeholder="City" />
+                                <label asp-for="City"></label>
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input asp-for="PhoneNumber" class="form-control" maxlength="10" placeholder="Phone Number" />
+                                <label asp-for="PhoneNumber"></label>
+                                <span asp-validation-for="PhoneNumber"  class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="d-flex gap-2 justify-content-end">
+                        <a asp-action="Index" asp-area="Admin" asp-controller="Home" class="btn btn-outline-warning">
+                            <i class="bi bi-x-circle me-1"></i> CANCEL
+                        </a>
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            <i class="bi bi-check-circle me-1"></i> CONTINUE
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

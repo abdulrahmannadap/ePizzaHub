@@ -1,0 +1,76 @@
+﻿@using ePizzaHub.Core.Database.Entities
+@model IEnumerable<Item>
+
+@{
+    ViewData["Title"] = "Item List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Item List</h5>
+        <a asp-action="NewItem" class="btn btn-sm btn-success">
+            <i class="bi bi-plus-circle me-1"></i> Add New Item
+        </a>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table dataTableMain table-bordered table-hover align-middle text-center">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Item Type</th>
+                    <th>Price</th>
+                    <th>Created Date</th>
+                    <th>Description</th>
+                    <th style="width: 140px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="9">No items found.</td>
+                    </tr>
+                }
+                else
+                {
+                    int index = 1;
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@index</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                {
+                                    <img src="@item.ImageUrl" alt="Image" class="img-thumbnail" style="max-width: 60px;" />
+                                }
+                                else
+                                {
+                                    <span class="text-muted">No image</span>
+                                }
+                            </td>
+                            <td>@item.Name</td>
+                            <td>@item.Category?.Name</td>
+                            <td>@item.ItemType?.Name</td>
+                            <td>₹ @item.UnitPrice.ToString("0.00")</td>
+                            <td>@item.CreatedDate.ToShortDateString()</td>
+                            <td>@item.Description</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary me-1">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger" >
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        index++;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
